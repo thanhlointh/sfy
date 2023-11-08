@@ -1,0 +1,8 @@
+fastapi==0.104.1
+pydantic==2.4
+sqlmodel
+uvicorn
+orjson
+alembic
+pydantic[dotenv]
+psycopg2-binary
