@@ -4,7 +4,6 @@ Base model
 import re
 from functools import partial
 from uuid import UUID,uuid4
-from typing import Annotated
 from sqlalchemy.orm import declared_attr
 from sqlmodel import Field, SQLModel
 
@@ -33,5 +32,5 @@ class BaseDBModel(SQLModel):
         return snake_case(cls.__name__.replace("DB", ""))
     
     id : UUID | None = Field(default_factory=uuid4,primary_key=True)
-
+    deleted : bool | None = Field(default=False)
     

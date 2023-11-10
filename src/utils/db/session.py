@@ -7,6 +7,7 @@ from contextlib import contextmanager
 from sqlmodel import Session, create_engine
 from src.settings.general import DBSettings
 
+# print(DBSettings().db_url)
 engine = create_engine(url=DBSettings().db_url)
 
 def get_session():

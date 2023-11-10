@@ -6,3 +6,5 @@ orjson
 alembic
 pydantic[dotenv]
 psycopg2-binary
+langchain
+pydantic[email]

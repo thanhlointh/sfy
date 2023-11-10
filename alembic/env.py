@@ -4,7 +4,7 @@ from src.models.db import models
 from src.utils.db.session import engine
 from alembic import context
 from sqlmodel import SQLModel
-
+from sqlalchemy import pool
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
@@ -60,9 +60,13 @@ def run_migrations_online() -> None:
     and associate a connection with the context.
 
     """
-    with engine.connect() as connection:
-        context.configure(connection=connection,target_metadata=SQLModel.metadata)
-        context.run_migrations()
+    connectable = engine
+
+    with connectable.connect() as connection:
+        context.configure(connection=connection, target_metadata=SQLModel.metadata)
+
+        with context.begin_transaction():
+            context.run_migrations()
 
 
 if context.is_offline_mode():
